@@ -81,7 +81,7 @@ class PetResource {
         if (type == 6) {
             sleepDuration = (long) (3000 + Math.random() * 2000);
         }else if(type == 5){//type bird will cause an exception, this is wanted behavior to force an exception
-            throw new Exception("Exception message");
+            throw new Exception("Exception thrown for showcase uses");
         }
         else {
             sleepDuration = (long) (5 + Math.random() * 5);
