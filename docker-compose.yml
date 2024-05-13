@@ -79,6 +79,21 @@ services:
     ports:
      - 8083:8083
 
+  soap-service:
+    image: inspectit/spring-petclinic-soap-service:${INSPECTIT_PETCLINIC_VERSION}
+    container_name: soap-service
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+    ports:
+     - 8877:8877
+
   api-gateway:
     image: inspectit/spring-petclinic-api-gateway:${INSPECTIT_PETCLINIC_VERSION}
     container_name: api-gateway

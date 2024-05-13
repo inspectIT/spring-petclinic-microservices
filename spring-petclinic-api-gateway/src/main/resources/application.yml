@@ -24,8 +24,12 @@ spring:
             - Path=/api/customer/**
           filters:
             - StripPrefix=2
-
-
+        - id: soap-service
+          uri: lb://soap-service
+          predicates:
+            - Path=/api/soap/**
+          filters:
+            - StripPrefix=2
 
 ---
 spring:
