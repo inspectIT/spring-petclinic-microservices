@@ -10,7 +10,7 @@ When running locally and standalone, use following endpoint to test the service:
  curl --header "content-type: text/xml" -d @./spring-petclinic-soap-service/request.xml http://[HOST]:[PORT]/ws
 ```
 
-or go through the api-gateway:
+or go through the api-gateway, when running in the docker-compose:
 ```
  curl --header "content-type: text/xml" -d @./spring-petclinic-soap-service/request.xml http://[HOST]:[PORT]/api/soap/ws
 ```

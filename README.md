@@ -26,7 +26,15 @@ You can tell Config Server to use your local Git repository by using `native` Sp
 `-Dspring.profiles.active=native -DGIT_REPO=/projects/spring-petclinic-microservices-config`
 
 ## Starting services locally with docker-compose
-In order to start entire infrastructure using Docker, you have to build images by executing
+
+Just start the infrastructure with `docker-compose up` or `podman-compose up` command, if you want to use the images from the inspectIT Docker Hub.
+Make sure to set the desired image-tag in .env file. The default tag is `latest`.
+
+If you want to execute the application with the postgres profile, you can use the following command:
+
+`docker-compose -f docker-compose-postgres.yml up`
+
+If you want to build the images locally, you can use the following command:
 ``bash
 ./mvnw clean install -P buildDocker
 ``
