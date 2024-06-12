@@ -80,7 +80,7 @@ services:
      - 8083:8083
 
   soap-service:
-    image: inspectit/spring-petclinic-soap-service:${INSPECTIT_PETCLINIC_VERSION}
+    image: localhost/ntlevinkerschberger/cxf-service-sample
     container_name: soap-service
     deploy:
       resources:
