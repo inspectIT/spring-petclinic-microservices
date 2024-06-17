@@ -24,7 +24,7 @@ ENV SPRING_PROFILES_ACTIVE docker
 VOLUME /tmp
 
 # Add Spring Boot app.jar to Container
-COPY --from=0 "/service/target/service-*-SNAPSHOT.jar" app.jar
+COPY --from=0 "/service/target/spring-petclinic-soap-service-*-SNAPSHOT.jar" app.jar
 COPY --from=0 "/service/target/classes/application.yml" application.yml
 
 # Workaroung, cause the service-definition references the file from the wrong location
