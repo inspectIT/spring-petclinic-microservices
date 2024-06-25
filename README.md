@@ -26,7 +26,15 @@ You can tell Config Server to use your local Git repository by using `native` Sp
 `-Dspring.profiles.active=native -DGIT_REPO=/projects/spring-petclinic-microservices-config`
 
 ## Starting services locally with docker-compose
-In order to start entire infrastructure using Docker, you have to build images by executing
+
+Just start the infrastructure with `docker-compose up` or `podman-compose up` command, if you want to use the images from the inspectIT Docker Hub.
+Make sure to set the desired image-tag in .env file. The default tag is `latest`.
+
+If you want to execute the application with the postgres profile, you can use the following command:
+
+`docker-compose -f docker-compose-postgres.yml up`
+
+If you want to build the images locally, you can use the following command:
 ``bash
 ./mvnw clean install -P buildDocker
 ``
@@ -86,33 +94,32 @@ Our issue tracker is available here: https://github.com/spring-petclinic/spring-
 ## Database configuration
 
 In its default configuration, Petclinic uses an in-memory database (HSQLDB) which gets populated at startup with data.
-A similar setup is provided for MySql in case a persistent database configuration is needed.
-Dependency for Connector/J, the MySQL JDBC driver is already included in the `pom.xml` files.
+A similar setup is provided for Postgres in case a persistent database configuration is needed.
+Dependency for the Postgres JDBC driver is already included in the `pom.xml` files.
 
-### Start a MySql database
+### Start a Postgres database
 
-You may start a MySql database with docker:
+You may start a Postgres database with docker:
 
 ```
-docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7.8
+docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
 ```
-or download and install the MySQL database (e.g., MySQL Community Server 5.7 GA), which can be found here: https://dev.mysql.com/downloads/
+or download and install the Postgres database, which can be found here: https://dev.mysql.com/downloads/
 
-### Use the Spring 'mysql' profile
+### Use the Spring 'postgres' profile
 
-To use a MySQL database, you have to start 3 microservices (`visits-service`, `customers-service` and `vets-services`)
-with the `mysql` Spring profile. Add the `--spring.profiles.active=mysql` as programm argument.
+To use a postgres database, you have to start 3 microservices (`visits-service`, `customers-service` and `vets-services`)
+with the `postgres` Spring profile. Add the `--spring.profiles.active=postgres` as programm argument.
 
 By default, at startup, database schema will be created and data will be populated.
-You may also manually create the PetClinic database and data by executing the `"db/mysql/{schema,data}.sql"` scripts of each 3 microservices. 
-In the `application.yml` of the [Configuration repository], set the `initialization-mode` to `never`.
+You may also manually create the PetClinic database and data by executing the `"db/postgres/{schema,data}.sql"` scripts of each 3 microservices. 
 
-If you are running the microservices with Docker, you have to add the `mysql` profile into the (Dockerfile)[docker/Dockerfile]:
+In the `application.yml` of the [Configuration repository], set the `host` either to the desired designation of the database.
+
+If you are running the microservices with Docker, you have to add the `postgres` profile into the (Dockerfile)[docker/Dockerfile]:
 ```
-ENV SPRING_PROFILES_ACTIVE docker,mysql
+ENV SPRING_PROFILES_ACTIVE docker,postgres
 ```
-In the `mysql section` of the `application.yml` from the [Configuration repository], you have to change 
-the host and port of your MySQL JDBC connection string. 
 
 ## Custom metrics monitoring
 
@@ -220,3 +227,8 @@ For pull requests, editor preferences are available in the [editor config](.edit
 
 [Configuration repository]: https://github.com/spring-petclinic/spring-petclinic-microservices-config
 [Spring Boot Actuator Production Ready Metrics]: https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-metrics.html
+
+# InspectIT related Stuff
+
+## Soap Service Testing
+For more information about testing the custom soap service and client, please refer to the [README](spring-petclinic-soap-service/README.md) in the soap folder.
