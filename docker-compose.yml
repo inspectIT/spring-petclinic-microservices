@@ -80,7 +80,7 @@ services:
      - 8083:8083
 
   soap-service:
-    image: ntlevinkerschberger/cxf-service-sample
+    image: inspectit/spring-petclinic-soap-service:${INSPECTIT_PETCLINIC_VERSION}
     container_name: soap-service
     deploy:
       resources:
@@ -95,7 +95,7 @@ services:
      - 8877:8877
 
   soap-client:
-    image: ntlevinkerschberger/spring-petclinic-soap-client
+    image: inspectit/spring-petclinic-soap-client:${INSPECTIT_PETCLINIC_VERSION}
     container_name: soap-client
     ports:
      - 7777:7777

@@ -5,6 +5,7 @@ package de.novatec.inspectit.springpetclinicsoapclient.endpoint;
 import de.codecentric.namespace.weatherservice.WeatherException;
 import de.codecentric.namespace.weatherservice.WeatherService;
 import de.codecentric.namespace.weatherservice.general.ForecastReturn;
+import de.novatec.inspectit.springpetclinicsoapclient.transformation.GetCityForecastByZipInMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import de.novatec.inspectit.springpetclinicsoapclient.dto.WeatherRequest;
 import de.novatec.inspectit.springpetclinicsoapclient.dto.WeatherResponse;
-import de.novatec.inspectit.springpetclinicsoapclient.transformation.GetCityForecastByZipInMapper;
 import de.novatec.inspectit.springpetclinicsoapclient.transformation.GetCityForecastByZipOutMapper;
 
 @RestController
@@ -23,6 +23,9 @@ public class WeatherServiceSoapClient {
 
     @Autowired
     private WeatherService weatherServiceClient;
+
+    @Value("${webservice.client.url}")
+    private String clientUrl;
 
     @RequestMapping(path = "/{zipcode}/{seniority}/{cash}", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -43,9 +46,5 @@ public class WeatherServiceSoapClient {
 
         return GetCityForecastByZipInMapper.mapForecastResponseToWeatherResponse(forecastReturn);
     }
-
-
-    @Value("${webservice.client.url}")
-    private String clientUrl;
 
 }

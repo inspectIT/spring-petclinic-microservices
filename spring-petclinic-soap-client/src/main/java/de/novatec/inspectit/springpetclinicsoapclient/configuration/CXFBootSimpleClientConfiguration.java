@@ -14,6 +14,8 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 @PropertySource("classpath:application.yaml")
 public class CXFBootSimpleClientConfiguration {
 
+    static final String EXAMPLE_STRING = "example";
+
     @Value("${webservice.client.url}")
     private String clientUrl;
 

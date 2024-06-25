@@ -16,8 +16,6 @@ RUN mvn clean install -DskipTests
 # Just using the build artifact and then removing the build-container
 FROM eclipse-temurin:17
 
-MAINTAINER Jonas Hecht
-
 ENV SPRING_PROFILES_ACTIVE docker
 
 

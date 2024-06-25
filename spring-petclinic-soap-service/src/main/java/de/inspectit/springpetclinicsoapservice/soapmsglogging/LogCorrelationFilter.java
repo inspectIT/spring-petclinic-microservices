@@ -1,4 +1,4 @@
-package de.jonashackt.tutorial.soapmsglogging;
+package de.inspectit.springpetclinicsoapservice.soapmsglogging;
 
 import jakarta.servlet.*;
 import org.slf4j.MDC;
@@ -26,7 +26,7 @@ public class LogCorrelationFilter implements Filter {
             // finally remove unique-Logging-Id, so that it could´nt be accidentally
             // reused for another Consumer-Request
             MDC.remove(SERVICE_CALL_ID_KEY);
-        }       
+        }
     }
 
     @Override

@@ -1,4 +1,4 @@
-package de.jonashackt.tutorial.transformation;
+package de.inspectit.springpetclinicsoapservice.transformation;
 
 import java.time.ZonedDateTime;
 import java.util.GregorianCalendar;
@@ -18,7 +18,7 @@ public final class GetCityForecastByZIPOutMapper {
 	private static de.codecentric.namespace.weatherservice.general.ObjectFactory objectFactoryGeneral = new de.codecentric.namespace.weatherservice.general.ObjectFactory();
 	private static de.codecentric.namespace.weatherservice.datatypes.ObjectFactory objectFactoryDatatypes = new de.codecentric.namespace.weatherservice.datatypes.ObjectFactory();
 
-	public static ForecastReturn mapGeneralOutlook2Forecast() {      
+	public static ForecastReturn mapGeneralOutlook2Forecast() {
 		ForecastReturn forecastReturn = objectFactoryGeneral.createForecastReturn();
 		forecastReturn.setCity("Weimar");
 		forecastReturn.setState("Deutschland");
@@ -37,7 +37,7 @@ public final class GetCityForecastByZIPOutMapper {
 
 
 	private static Forecast generateForecast(String city) {
-		Forecast forecast = objectFactoryDatatypes.createForecast();	
+		Forecast forecast = objectFactoryDatatypes.createForecast();
 		forecast.setDate(generateCalendarFromNow());
 		forecast.setDesciption("Vorhersage für " + city);
 		forecast.setTemperatures(generateTemp());
@@ -45,7 +45,7 @@ public final class GetCityForecastByZIPOutMapper {
 		return forecast;
 	}
 
-	
+
 	private static POP generateRegenwahrscheinlichkeit() {
 		POP pop = objectFactoryDatatypes.createPOP();
 		pop.setDaytime("22%");
@@ -72,5 +72,5 @@ public final class GetCityForecastByZIPOutMapper {
 		}
 		return xmlGregCal;
 	}
-	
+
 }

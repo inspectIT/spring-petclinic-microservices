@@ -1,5 +1,5 @@
 server:
-  port: 9899
+  port: 7777
 spring:
   application:
     name: soap-client

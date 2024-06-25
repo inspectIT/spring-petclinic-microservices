@@ -1,8 +1,8 @@
-package de.jonashackt.tutorial.controller;
+package de.inspectit.springpetclinicsoapservice.controller;
 
 import de.codecentric.namespace.weatherservice.general.ForecastRequest;
 import de.codecentric.namespace.weatherservice.general.ForecastReturn;
-import de.jonashackt.tutorial.transformation.GetCityForecastByZIPOutMapper;
+import de.inspectit.springpetclinicsoapservice.transformation.GetCityForecastByZIPOutMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  *  for calling Backend-Services and handling Backend-Exceptions
  *  So it decouples the WSDL-generated Classes from the internal Classes - for when the former changes,
  *  nothing or only the mapping has to be changed
- */ 
+ */
 @Component
 public class WeatherServiceController {
 
@@ -38,7 +38,7 @@ public class WeatherServiceController {
 
         return GetCityForecastByZIPOutMapper.mapGeneralOutlook2Forecast();
 	}
-	
+
 	/*
 	 * Other Methods would follow here...
 	 */

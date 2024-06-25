@@ -1,4 +1,4 @@
-package de.jonashackt.tutorial.utils;
+package de.inspectit.springpetclinicsoapservice.utils;
 
 import de.codecentric.namespace.weatherservice.datatypes.ProductName;
 import de.codecentric.namespace.weatherservice.general.ForecastCustomer;

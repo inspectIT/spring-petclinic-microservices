@@ -1,12 +1,12 @@
-package de.jonashackt.tutorial.endpoint;
+package de.inspectit.springpetclinicsoapservice.endpoint;
 
-import static de.jonashackt.tutorial.utils.TestHelper.generateDummyRequest;
+import static de.inspectit.springpetclinicsoapservice.utils.TestHelper.generateDummyRequest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.webservices.server.WebServiceServerTest;
+
 import org.springframework.boot.test.context.SpringBootTest;
 
 import de.codecentric.namespace.weatherservice.WeatherException;
@@ -14,11 +14,11 @@ import de.codecentric.namespace.weatherservice.WeatherService;
 import de.codecentric.namespace.weatherservice.general.ForecastRequest;
 import de.codecentric.namespace.weatherservice.general.ForecastReturn;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class WeatherServiceIntegrationTest {
+ @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class WeatherServiceSystemTest {
 
     @Autowired
-    private WeatherService weatherServiceIntegrationTestClient;
+    private WeatherService weatherServiceSystemTestClient;
 
     @Test
     public void getCityForecastByZIP() throws WeatherException {
@@ -26,7 +26,7 @@ public class WeatherServiceIntegrationTest {
         ForecastRequest forecastRequest = generateDummyRequest();
 
         // When
-        ForecastReturn forecastReturn = weatherServiceIntegrationTestClient.getCityForecastByZIP(forecastRequest);
+        ForecastReturn forecastReturn = weatherServiceSystemTestClient.getCityForecastByZIP(forecastRequest);
 
         // Then
         assertNotNull(forecastReturn);

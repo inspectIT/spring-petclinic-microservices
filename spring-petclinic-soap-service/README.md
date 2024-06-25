@@ -6,6 +6,9 @@ It is used to demonstrate and try how we can instrument SOAP-based Services with
 The service is based on Spring Boot and uses Apache CXF to provide a SOAP endpoint.
 It exposes a WSDL, which is implemented by spring-petclinic-soap-client.
 
+## Compiling
+You have to run mvn clean install to compile the service, as well as the client. There are some Auto-Generated Interfaces coming out of the wsdl file.
+
 ## Testing
 The service can be tested by itself or by using the spring-petclinic-soap-client.
 ### To test it by itself you have to:
@@ -65,7 +68,7 @@ The answer should look like this:
 
 ### Alternatively you can also test the service using the spring-petclinic-soap-client:
 1. Start the docker-compose environment
-2. Make a request to the service using the spring-petclinic-soap-client at http://localhost:56100/weather/99423/45/50555.
+2. Make a request to the service using the spring-petclinic-soap-client at http://localhost:7777/weather/99423/45/50555.
 3. The Client will now call the service and return the city name (Weimar) for the ZIP code 99423.
 4. The answer should look like this:
 ```json

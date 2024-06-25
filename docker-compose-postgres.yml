@@ -100,6 +100,21 @@ services:
     ports:
      - 8877:8877
 
+  soap-client:
+    image: inspectit/spring-petclinic-soap-client:${INSPECTIT_PETCLINIC_VERSION}
+    container_name: soap-client
+    ports:
+      - 7777:7777
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    depends_on:
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
+
   api-gateway:
     image: inspectit/spring-petclinic-api-gateway:${INSPECTIT_PETCLINIC_VERSION}
     container_name: api-gateway
