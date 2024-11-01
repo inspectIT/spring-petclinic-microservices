@@ -61,7 +61,10 @@ class PetResource {
         Owner owner = optionalOwner.orElseThrow(() -> new ResourceNotFoundException("Owner "+ownerId+" not found"));
         owner.addPet(pet);
 
-        return save(pet, petRequest);
+        Pet savedPet = save(pet, petRequest);
+        printPetType(savedPet.getType().getName());
+
+        return savedPet;
     }
 
     @PutMapping("/owners/*/pets/{petId}")
@@ -121,4 +124,10 @@ class PetResource {
         return pet.get();
     }
 
+    /**
+     * Helper method for instrumentation.
+     */
+    private void printPetType(String petType) {
+        System.out.println("Saved: " + petType);
+    }
 }
