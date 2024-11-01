@@ -128,6 +128,6 @@ class PetResource {
      * Helper method for instrumentation.
      */
     private void printPetType(String petType) {
-        System.out.println("Saved: " + petType);
+        log.info("Saved: {}", petType);
     }
 }
