@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright 2002-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import org.springframework.samples.petclinic.customers.model.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Juergen Hoeller
@@ -55,14 +56,19 @@ class PetResource {
     @ResponseStatus(HttpStatus.CREATED)
     public Pet processCreationForm(
         @RequestBody PetRequest petRequest,
-        @PathVariable("ownerId") @Min(1) int ownerId) {
+        @PathVariable("ownerId") int ownerId) throws Exception {
 
-        Owner owner = ownerRepository.findById(ownerId)
-            .orElseThrow(() -> new ResourceNotFoundException("Owner " + ownerId + " not found"));
+        validatePetType(petRequest.typeId());
 
         final Pet pet = new Pet();
+        final Optional<Owner> optionalOwner = ownerRepository.findById(ownerId);
+        Owner owner = optionalOwner.orElseThrow(() -> new ResourceNotFoundException("Owner "+ownerId+" not found"));
         owner.addPet(pet);
-        return save(pet, petRequest);
+
+        Pet savedPet = save(pet, petRequest);
+        printPetType(savedPet.getType().getName());
+
+        return savedPet;
     }
 
     @PutMapping("/owners/*/pets/{petId}")
@@ -71,6 +77,29 @@ class PetResource {
         int petId = petRequest.id();
         Pet pet = findPetById(petId);
         save(pet, petRequest);
+    }
+
+    private void validatePetType(int type) throws Exception {
+        long sleepDuration = 0;
+
+        //If the pet type is of type hamster, artificially lengthens the process time
+        if (type == 6) {
+            sleepDuration = (long) (3000 + Math.random() * 2000);
+        }else if(type == 5){//type bird will cause an exception, this is wanted behavior to force an exception
+            throw new Exception("[BirdTypeChosen] Exception thrown for showcase uses");
+        }
+        else {
+            sleepDuration = (long) (5 + Math.random() * 5);
+        }
+        sleepDurationOf(sleepDuration);
+    }
+
+    private void sleepDurationOf(long sleepDuration) {
+        try {
+            Thread.sleep(sleepDuration);
+        }
+        catch (InterruptedException e) {
+        }
     }
 
     private Pet save(final Pet pet, final PetRequest petRequest) {
@@ -87,14 +116,22 @@ class PetResource {
 
     @GetMapping("owners/*/pets/{petId}")
     public PetDetails findPet(@PathVariable("petId") int petId) {
-        Pet pet = findPetById(petId);
-        return new PetDetails(pet);
+        return new PetDetails(findPetById(petId));
     }
 
 
     private Pet findPetById(int petId) {
-        return petRepository.findById(petId)
-            .orElseThrow(() -> new ResourceNotFoundException("Pet " + petId + " not found"));
+        Optional<Pet> pet = petRepository.findById(petId);
+        if (!pet.isPresent()) {
+            throw new ResourceNotFoundException("Pet "+petId+" not found");
+        }
+        return pet.get();
     }
 
+    /**
+     * Helper method for instrumentation.
+     */
+    private void printPetType(String petType) {
+        log.info("Saved: {}", petType);
+    }
 }

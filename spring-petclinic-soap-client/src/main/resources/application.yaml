@@ -1,0 +1,22 @@
+server:
+  port: 7777
+spring:
+  application:
+    name: soap-client
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
+
+# SOAP client configuration (which SOAP server we want to access)
+webservice:
+  client:
+    url: http://localhost:8877/soap-api/WeatherSoapService_1.0
+
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+    import: configserver:http://config-server:8888
+

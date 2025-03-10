@@ -24,6 +24,8 @@
         <module>spring-petclinic-config-server</module>
         <module>spring-petclinic-discovery-server</module>
         <module>spring-petclinic-api-gateway</module>
+        <module>spring-petclinic-soap-service</module>
+        <module>spring-petclinic-soap-client</module>
     </modules>
 
     <properties>
@@ -32,8 +34,12 @@
         <spring-cloud.version>2024.0.0</spring-cloud.version>
         <chaos-monkey-spring-boot.version>3.1.0</chaos-monkey-spring-boot.version>
         <jolokia-core.version>1.7.1</jolokia-core.version>
+      
+        <!-- Workaround for resolving the issue while using the provided lombok dependency in upgraded Java version.
+        Should be removed while future upgrading-->
+        <lombok.version>1.18.30</lombok.version>
 
-        <docker.image.prefix>springcommunity</docker.image.prefix>
+        <docker.image.prefix>inspectit</docker.image.prefix>
         <docker.image.exposed.port>9090</docker.image.exposed.port>
         <docker.image.dockerfile.dir>${basedir}</docker.image.dockerfile.dir>
         <!-- podman is also supported -->
@@ -103,6 +109,7 @@
                     <plugin>
                         <groupId>io.github.git-commit-id</groupId>
                         <artifactId>git-commit-id-maven-plugin</artifactId>
+                        <version>8.0.2</version>
                         <executions>
                             <execution>
                                 <goals>
