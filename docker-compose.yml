@@ -94,7 +94,7 @@ services:
       discovery-server:
         condition: service_healthy
     ports:
-     - 8084:8084
+      - 8084:8084
 
   soap-service:
     image: inspectit/spring-petclinic-soap-service:${INSPECTIT_PETCLINIC_VERSION}
