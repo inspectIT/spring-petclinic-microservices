@@ -26,5 +26,7 @@ nohup java -jar spring-petclinic-vets-service/target/*.jar --server.port=8083 --
 nohup java -jar spring-petclinic-genai-service/target/*.jar --server.port=8084 --spring.profiles.active=chaos-monkey > target/genai-service.log 2>&1 &
 nohup java -jar spring-petclinic-api-gateway/target/*.jar --server.port=8080 --spring.profiles.active=chaos-monkey > target/gateway-service.log 2>&1 &
 nohup java -jar spring-petclinic-admin-server/target/*.jar --server.port=9090 --spring.profiles.active=chaos-monkey > target/admin-server.log 2>&1 &
+nohup java -jar spring-petclinic-soap-service/target/*.jar --server.port=8877  > target/soap-service.log 2>&1 &
+nohup java -jar spring-petclinic-soap-client/target/*.jar --server.port=7777  > target/soap-client.log 2>&1 &
 echo "Waiting for apps to start"
 sleep 60

@@ -1,5 +1,5 @@
 # Just using the build artifact
-# Please use mvn isntall
+# Please use mvn install
 FROM eclipse-temurin:17
 
 MAINTAINER Jonas Hecht
