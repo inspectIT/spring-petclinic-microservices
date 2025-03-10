@@ -59,7 +59,10 @@
     <script src="http://localhost:8085/boomerang/plugins/history.js"></script>
     <script>
         BOOMR.init({
-            beacon_url: "http://localhost:8085/beacon/"
+            beacon_url: "http://localhost:8085/beacon/",
+            OpenTelemetry: {
+                serviceName: "frontend"
+            }
         });
     </script>
 
